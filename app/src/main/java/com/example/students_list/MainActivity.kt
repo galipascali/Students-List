@@ -1,6 +1,8 @@
 package com.example.students_list
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +19,20 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.studentsRecyclerView)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = StudentsAdapter(viewModel.students)
+
+        val addButton = findViewById<Button>(R.id.addStudentButton)
+        addButton.setOnClickListener {
+            val intent = Intent(this, NewStudentActivity::class.java)
+            startActivity(intent)
+        }
+
+    }
+    override fun onResume() {
+        super.onResume()
+
+        val recyclerView = findViewById<RecyclerView>(R.id.studentsRecyclerView)
+
         recyclerView.adapter = StudentsAdapter(viewModel.students)
     }
 
