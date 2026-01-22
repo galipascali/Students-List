@@ -13,17 +13,9 @@ class StudentDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student_details)
 
-        val studentId = intent.getStringExtra("STUDENT_ID")
-        if (studentId == null) {
-            finish()
-            return
-        }
+        val studentId = intent.getStringExtra("STUDENT_ID") ?: return
 
-        val student = StudentsRepository.getStudentById(studentId)
-        if (student == null) {
-            finish()
-            return
-        }
+        val student = StudentsRepository.getStudentById(studentId) ?: return
 
         val idTextView = findViewById<TextView>(R.id.idTextView)
         val nameTextView = findViewById<TextView>(R.id.nameTextView)
