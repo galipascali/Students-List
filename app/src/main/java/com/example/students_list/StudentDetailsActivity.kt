@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -23,6 +22,7 @@ class StudentDetailsActivity : AppCompatActivity() {
         val phoneTextView = findViewById<TextView>(R.id.phoneTextView)
         val addressTextView = findViewById<TextView>(R.id.addressTextView)
         val checkBox = findViewById<CheckBox>(R.id.checkBox)
+        val editButton = findViewById<Button>(R.id.editButton)
 
         idTextView.text = "ID: ${student.id}"
         nameTextView.text = "Name: ${student.name}"
@@ -30,8 +30,18 @@ class StudentDetailsActivity : AppCompatActivity() {
         addressTextView.text = "Address: ${student.address}"
         checkBox.isChecked = student.isChecked
 
-        checkBox.setOnCheckedChangeListener { _, isChecked ->
-            student.isChecked = isChecked
+        editButton.setOnClickListener {
+            val intent = Intent(this, EditStudentActivity::class.java)
+            intent.putExtra("STUDENT_ID", student.id)
+            startActivityForResult(intent, 1)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            finish()
         }
     }
 }
