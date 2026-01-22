@@ -12,6 +12,8 @@ class StudentDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student_details)
+        supportActionBar?.title = "Student Details"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val studentId = intent.getStringExtra("STUDENT_ID") ?: return
 
@@ -43,5 +45,10 @@ class StudentDetailsActivity : AppCompatActivity() {
         if (requestCode == 1 && resultCode == RESULT_OK) {
             finish()
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 }

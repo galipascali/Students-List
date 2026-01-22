@@ -13,22 +13,12 @@ class EditStudentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_student)
+        supportActionBar?.title = "Edit Student"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val studentId = intent.getStringExtra("STUDENT_ID")
-        if (studentId == null) {
-            finish()
-            return
-        }
+        val studentId = intent.getStringExtra("STUDENT_ID") ?: return
 
-        Log.d("EditStudentActivity", "Started with STUDENT_ID=$studentId")
-
-        val student = StudentsRepository.getStudentById(studentId)
-        Log.d("EditStudentActivity", "Started with STUDENT=${student?.name}")
-
-        if (student == null) {
-            finish()
-            return
-        }
+        val student = StudentsRepository.getStudentById(studentId) ?: return
 
         val idEditText = findViewById<EditText>(R.id.idEditText)
         val nameEditText = findViewById<EditText>(R.id.nameEditText)
@@ -60,5 +50,10 @@ class EditStudentActivity : AppCompatActivity() {
             setResult(RESULT_OK)
             finish()
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 }

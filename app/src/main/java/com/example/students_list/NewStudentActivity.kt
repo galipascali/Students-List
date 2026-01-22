@@ -10,6 +10,8 @@ class NewStudentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_student)
+        supportActionBar?.title = "New Student"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val idEditText = findViewById<EditText>(R.id.idEditText)
         val nameEditText = findViewById<EditText>(R.id.nameEditText)
@@ -36,5 +38,10 @@ class NewStudentActivity : AppCompatActivity() {
                 if (name.isEmpty()) nameEditText.error = "Name required"
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 }

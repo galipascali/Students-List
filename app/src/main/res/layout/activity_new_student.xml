@@ -10,10 +10,6 @@
         android:layout_height="wrap_content"
         android:paddingVertical="30dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/New_Student_Title" />
         <ImageView
             android:id="@+id/studentImageView"
             android:layout_width="150dp"
