@@ -5,5 +5,7 @@ data class Student(
     var name: String,
     var phone: String,
     var address: String,
-    var isChecked: Boolean
+    var isChecked: Boolean,
+    val imageResId: Int = R.drawable.default_avatar
+
 )
