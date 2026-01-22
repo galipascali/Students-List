@@ -1,0 +1,37 @@
+package com.example.students_list
+
+import android.content.Intent
+import android.os.Bundle
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+
+class StudentDetailsActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_student_details)
+
+        val studentId = intent.getStringExtra("STUDENT_ID") ?: return
+
+        val student = StudentsRepository.getStudentById(studentId) ?: return
+
+        val idTextView = findViewById<TextView>(R.id.idTextView)
+        val nameTextView = findViewById<TextView>(R.id.nameTextView)
+        val phoneTextView = findViewById<TextView>(R.id.phoneTextView)
+        val addressTextView = findViewById<TextView>(R.id.addressTextView)
+        val checkBox = findViewById<CheckBox>(R.id.checkBox)
+
+        idTextView.text = "ID: ${student.id}"
+        nameTextView.text = "Name: ${student.name}"
+        phoneTextView.text = "Phone: ${student.phone}"
+        addressTextView.text = "Address: ${student.address}"
+        checkBox.isChecked = student.isChecked
+
+        checkBox.setOnCheckedChangeListener { _, isChecked ->
+            student.isChecked = isChecked
+        }
+    }
+}
